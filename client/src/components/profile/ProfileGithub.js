@@ -8,7 +8,7 @@ class ProfileGithub extends Component {
     this.state = {
       clientId: "de7c57e22b879b03e4ae",
       clientSecret: "00904ae15f0ac13374ee8c72c213abf8cf499091",
-      count: 5,
+      count: 10,
       sort: "created: asc",
       repos: []
     };
