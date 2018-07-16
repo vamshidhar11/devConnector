@@ -2,15 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-mongoose.promise = require("bluebird");
-
-mongoose
-  .connect(
-    "mongodb://localhost/devconnector",
-    { promiseLibrary: require("bluebird") }
-  )
-  .then(() => console.log("connection succesful"))
-  .catch(err => console.error(err));
 
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
@@ -18,18 +9,28 @@ const posts = require("./routes/api/posts");
 
 const app = express();
 
+// mongoose.promise = require("bluebird");
+
+// mongoose
+//   .connect(
+//     "mongodb://localhost/devconnector",
+//     { promiseLibrary: require("bluebird") }
+//   )
+//   .then(() => console.log("connection succesful"))
+//   .catch(err => console.error(err));
+
 //Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//DB config
-// const db = require("./config/keys").mongoURI;
+// DB config
+const db = require("./config/keys").mongoURI;
 
 //Connect to MongoDB
-// mongoose
-//   .connect(db)
-//   .then(() => console.log("MongoDB Connected"))
-//   .catch(err => console.log(err));
+mongoose
+  .connect(db)
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
 // Passport middleware
 app.use(passport.initialize());
